@@ -83,5 +83,47 @@ function generatePassword() {
     confirms = confirms + 1;
   }
   console.log(confirm);
-  // The following are the conditionals will randomly pull from each of the four banks and pushed to end of newPassword
+  // Adding onditionals to randomly pull from each of the four banks and pushed to end of newPassword
+  if (numbers) {
+    newPassword.push(num[randomPull(num)]);
+  }
+  if (symbols) {
+    newPassword.push(sym[randomPull(sym)]);
+  }
+  if (caps) {
+    newPassword.push(alphabetCaps[randomPull(alphabetCaps)]);
+  }
+  if (lowercase) {
+    newPassword.push(alphabetLowercase[randomPull(alphabetLowercase)]);
+  }
+  console.log(newPassword);
+
+  //For loop Must include (at a min) one character from each bank,
+  // for finding the number of times to pull from the majorBank
+  // which is a minimum of 8 characters
+
+  for (var i = 0; i < passwordLength - confirms; i++) {
+    newPassword.unshift(majorBank[randomPull(majorBank)]);
+  }
+  // Array of newPassword
+  console.log(newPassword);
+
+  newPassword = newPassword.join("");
+
+  // String of newPassword
+  console.log(newPassword);
+  return newPassword;
 }
+// string is a parameter or placeholder for what you will put in when you add anything with a length property
+function randomPull(string) {
+  return Math.floor(Math.random() * string.length);
+}
+function writePassword() {
+  var password = generatePassword();
+  var passwordText = document.querySelector("#password");
+  passwordText.value = password;
+}
+// create a function called generatepassword
+
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
